@@ -6,7 +6,7 @@ import { imageItem } from './Interfaces/Interfaces';
 import './App.css';
 
 const API_KEY = process.env.REACT_APP_API_KEY
-
+console.log(API_KEY)
 function makeImageData(data: any): Array<Array<imageItem>> {
   const images: Array<Array<imageItem>> = []
   for (let i=0; i<data.length; i++) {
