@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import Alert from './Alert';
 
 interface props {
-    images: Array<imageItem> 
+    images?: Array<imageItem> 
 }
 
 const StyledRow = styled(Row) `
