@@ -1,24 +1,13 @@
-import React, { useState, useRef } from 'react';
-import { Button } from 'react-bootstrap';
-import { Gallery } from './Components';
+import React, { useState } from 'react';
+
+import { Gallery, NavBar } from './Components';
 import { imageItem } from './Interfaces/Interfaces';
-
 import './App.css';
-
-const API_KEY = process.env.REACT_APP_API_KEY
 
 function App() {
   	const [images, setImages] = useState<Array<imageItem>>([]);
-	const inputRef = useRef<HTMLInputElement>(null) 
-	const handleClick = (): void => {
-		const searchTerm = inputRef.current?.value;
-		if (searchTerm) {
-			fetchImages(searchTerm)
-		}
-		
-	}
-
-	const fetchImages = async (searchTerm: string | null) => {
+	const fetchImages = async (searchTerm: string) => {
+		const API_KEY = process.env.REACT_APP_API_KEY
 		const url = `https://pixabay.com/api/?key=${API_KEY}&q=${searchTerm}&image_type=photo`
 		try {
 			const res = await fetch(url)
@@ -32,11 +21,9 @@ function App() {
 			console.log(error)
 		}
 	} 
-
 	return (
 		<div className="App">
-			<input type="text" placeholder="Search" ref={inputRef} />
-			<Button onClick={handleClick}>search</Button>
+			<NavBar fetchImages={fetchImages}/>
 			<Gallery images={images} />
 		</div>
 	);

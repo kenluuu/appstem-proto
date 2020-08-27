@@ -14,3 +14,4 @@ export function makeImageGroup(data: Array<imageItem>): Array<Array<imageItem>> 
 	}
 	return imageGroup
 }
+

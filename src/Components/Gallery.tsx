@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Container, Row, Col, Image, Modal, ModalBody, Carousel, CarouselItem } from 'react-bootstrap';
 import { imageItem } from '../Interfaces/Interfaces';
 import { makeImageGroup } from '../Utilities/Utilities';
-
 import styled from 'styled-components';
 
 
@@ -28,12 +27,10 @@ const StyledImage = styled(Image) `
 
 const Gallery: React.FC<props> = (props) => {
 	const { images } = props;
-	
 	const [modal, setModal] = useState<boolean>(false);
 	const [activeIndex, setActiveIndex] = useState<number>(0)
 	const imageGroup = makeImageGroup(images)
 	const handleOnHide = () => setModal(false)
-	
 	const handleImgClick = (selectedIndex: number) => {
 		setModal(true)
 		setActiveIndex(selectedIndex)
@@ -65,7 +62,7 @@ const Gallery: React.FC<props> = (props) => {
 				</ModalBody>
 			</Modal>
 			{
-				imageGroup && imageGroup.map((imageRow, rowNum) => {
+				imageGroup.map((imageRow, rowNum) => {
 					return (
 						<StyledRow key={rowNum} className="justify-content-start">
 							{
