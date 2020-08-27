@@ -22,7 +22,7 @@ const NavTop: React.FC<Props> = (props) => {
 		}
 	}
     return (
-        <StyledNavBar sticky="top" bg="dark">
+        <StyledNavBar fixed="top" bg="dark">
             <StyledInput type="text" placeholder="Search" ref={inputRef} /> 
             <Button onClick={handleClick}>Search</Button>
         </StyledNavBar>
