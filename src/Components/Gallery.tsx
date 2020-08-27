@@ -44,7 +44,7 @@ const Gallery: React.FC<props> = (props) => {
 				show={modal}
 				onHide={handleOnHide}
 				size="lg"
-				
+				centered
 			>
 				<ModalBody>
 					<Carousel onSelect={handleOnSelect} defaultActiveIndex={activeIndex}>
