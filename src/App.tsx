@@ -6,7 +6,7 @@ import './App.css';
 
 
 function App() {
-	const [images, setImages] = useState<Array<imageItem>>([]);
+	const [images, setImages] = useState<Array<imageItem>>();
 	const fetchImages = async (searchTerm: string = '') => {
 		const API_KEY = process.env.REACT_APP_API_KEY
 		const url = `https://pixabay.com/api/?key=${API_KEY}&q=${searchTerm}&image_type=photo`

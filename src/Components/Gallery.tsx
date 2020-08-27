@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import Alert from './Alert';
 
 interface props {
-    images: Array<imageItem>
+    images: Array<imageItem> 
 }
 
 const StyledRow = styled(Row) `
@@ -36,15 +36,15 @@ const Gallery: React.FC<props> = (props) => {
 	const handleOnSelect = (selectedIndex: number): void => {
 		setGalleryState({ ...galleryState, activeIndex: selectedIndex});
 	}
-	const zeroMsg = "Sorry, we couldn't find any images for this search. Maybe give one of these a try?"
+	const zeroMsg = "Sorry, we couldn't find any images for this search."
 	return (
 		<Container fluid="sm">
-			{ images.length === 0 && <Alert bodyMsg={zeroMsg} alertProps={{variant:"dark"}}/> }
+			{ images && images.length === 0 && <Alert bodyMsg={zeroMsg} alertProps={{variant:"dark"}}/> }
 			<Modal show={galleryState.modal} onHide={handleOnHide} size="lg" centered>
 				<ModalBody>
 					<Carousel onSelect={handleOnSelect} defaultActiveIndex={galleryState.activeIndex}>
 						{
-							images.map((image) => {
+							images && images.map((image) => {
 								return (
 									<CarouselItem key={image.index}>
 										<Image src={image.imageUrl} fluid />

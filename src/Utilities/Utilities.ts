@@ -1,6 +1,7 @@
 import { imageItem } from '../Interfaces/Interfaces';
-export function makeImageGroup(data: Array<imageItem>): Array<Array<imageItem>> {
-	if (data.length === 0) {
+export function makeImageGroup(data: Array<imageItem> | undefined): Array<Array<imageItem>> {
+	
+	if (data === undefined || data.length === 0) {
 	  return []
 	}
 	const imageGroup: Array<Array<imageItem>> = []
