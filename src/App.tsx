@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Gallery, NavBar } from './Components';
 import { imageItem } from './Interfaces/Interfaces';
 import './App.css';
 
+
 function App() {
-  	const [images, setImages] = useState<Array<imageItem>>([]);
-	const fetchImages = async (searchTerm: string) => {
+	const [images, setImages] = useState<Array<imageItem>>([]);
+	const fetchImages = async (searchTerm: string = '') => {
 		const API_KEY = process.env.REACT_APP_API_KEY
 		const url = `https://pixabay.com/api/?key=${API_KEY}&q=${searchTerm}&image_type=photo`
 		try {
@@ -21,6 +22,9 @@ function App() {
 			console.log(error)
 		}
 	} 
+	useEffect(() => {
+		fetchImages()
+	}, [])
 	return (
 		<div className="App">
 			<NavBar fetchImages={fetchImages}/>

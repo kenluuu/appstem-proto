@@ -3,7 +3,7 @@ import { Container, Row, Col, Image, Modal, ModalBody, Carousel, CarouselItem } 
 import { imageItem } from '../Interfaces/Interfaces';
 import { makeImageGroup } from '../Utilities/Utilities';
 import styled from 'styled-components';
-
+import Alert from './Alert';
 
 interface props {
     images: Array<imageItem>
@@ -27,27 +27,22 @@ const StyledImage = styled(Image) `
 
 const Gallery: React.FC<props> = (props) => {
 	const { images } = props;
-	const [modal, setModal] = useState<boolean>(false);
-	const [activeIndex, setActiveIndex] = useState<number>(0)
+	const [galleryState, setGalleryState] = useState({modal: false, activeIndex: 0})
 	const imageGroup = makeImageGroup(images)
-	const handleOnHide = () => setModal(false)
+	const handleOnHide = () => setGalleryState({...galleryState, modal: false});
 	const handleImgClick = (selectedIndex: number) => {
-		setModal(true)
-		setActiveIndex(selectedIndex)
+		setGalleryState({ modal: true, activeIndex: selectedIndex});
 	}
 	const handleOnSelect = (selectedIndex: number): void => {
-		setActiveIndex(selectedIndex)
+		setGalleryState({ ...galleryState, activeIndex: selectedIndex});
 	}
+	const zeroMsg = "Sorry, we couldn't find any images for this search. Maybe give one of these a try?"
 	return (
 		<Container fluid="sm">
-			<Modal 
-				show={modal}
-				onHide={handleOnHide}
-				size="lg"
-				centered
-			>
+			{ images.length === 0 && <Alert bodyMsg={zeroMsg} alertProps={{variant:"dark"}}/> }
+			<Modal show={galleryState.modal} onHide={handleOnHide} size="lg" centered>
 				<ModalBody>
-					<Carousel onSelect={handleOnSelect} defaultActiveIndex={activeIndex}>
+					<Carousel onSelect={handleOnSelect} defaultActiveIndex={galleryState.activeIndex}>
 						{
 							images.map((image) => {
 								return (

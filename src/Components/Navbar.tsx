@@ -8,7 +8,6 @@ interface Props {
 const StyledNavBar = styled(Navbar) `
     justify-content: center;
 `
-
 const StyledInput = styled(FormControl) `
     max-width: 500px;
     margin-right: 10px;
