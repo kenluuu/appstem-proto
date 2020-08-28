@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Gallery, NavBar, Alert } from './Components';
 import { imageItem } from './Interfaces/Interfaces';
-import './App.css';
 import { getWords} from './Utilities/Utilities'
-
 
 function App() {
 	const [images, setImages] = useState<Array<imageItem>>();
@@ -24,7 +22,6 @@ function App() {
 		} catch (error) {
 			setError(true);
 		}
-		
 	} 
 	useEffect(() => {
 		getWords()

@@ -52,8 +52,7 @@ const Gallery: React.FC<props> = (props) => {
 								return (
 									<CarouselItem key={image.index}>
 										<Image src={image.imageUrl} fluid />
-									</CarouselItem>
-									
+									</CarouselItem>	
 								)
 							})
 						}

@@ -15,7 +15,7 @@ const P = styled.p `
     margin: 0;
 `
 const Alert: React.FC<Props> = (props) => {
-    const { bodyMsg, alertProps} = props;
+    const { bodyMsg, alertProps } = props;
     return (
         <StyledBaseAlert {...alertProps}>
             <P>{bodyMsg}</P>

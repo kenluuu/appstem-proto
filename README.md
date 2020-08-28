@@ -1,44 +1,19 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Assumptions
+The features of the site will scriptly be searching for images with a text field, displaying the results below. When an image is tapped the image will be displayed in a responsive modal. 
 
-## Available Scripts
+## Decisions
+Based on the number of feature requirements I decided the website should just be a single page site without any client side routing. However, if the number of features were to increase and had multiple user flow client side routing would be included. 
 
-In the project directory, you can run:
+The site will be composed of three main components: a main App component, a top navigation bar component, and a gallery component. The App component will be the parent component for the entire app and pass necessary data along to child components to help separtate the concerns of each component. The top navigation bar will handle all the user's interaction with the text field and calling the spell checker before a search is made. The gallery component will display all image results and handle the state of which image is selected and if the modal should display or not.
 
-### `yarn start`
+## Spell Checker Assumption
+All non vowels in the search term is correct.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Spell Checker Implementation
+The Spell Checker will first remove any non-letter characters in the search term and check if that word is in the Unix dictionary. If it is the term will be used in the search. 
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+If the term is not in the dictionary the Spell Checker will recursively generate all possible terms by substituting each vowel in the term will all vewols. Once all the possible terms are made the Spell Checker will select the first possible term that is in the Unix dictionary and use that as the search term. If no match is made the original term is used instead.
 
-### `yarn test`
+## Spell Checker Potential Runtime Improvements
+The current run time of the Spell Checker is O(5^(k)) time where k is the number of vowels in the search term. If all the words in the Unix dictionary is placed in a Trie data structure look ups for a correct term will be O(n) where n is the length of the term.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).

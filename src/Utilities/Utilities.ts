@@ -15,7 +15,7 @@ export function makeImageGroup(data: Array<imageItem> | undefined): Array<Array<
 	return imageGroup
 }
 
-export let allWords: Set<string> = new Set()
+let allWords: Set<string> = new Set()
 
 export async function getWords() {
 	const url = process.env.REACT_APP_WORDS_URL;
@@ -38,7 +38,7 @@ function isVowel(char: string):boolean {
 }
 
 function subAllVowels(potentialTerms: Set<string>, term: Array<string>, start: number) {
-	let vewols = 'aeiou';
+	const vewols = 'aeiou';
 	for(let i=start; i<term.length; i++) {
 		if (isVowel(term[i])) {
 			for (let j=0; j<vewols.length; j++) {
@@ -50,7 +50,11 @@ function subAllVowels(potentialTerms: Set<string>, term: Array<string>, start: n
 	}
 	return potentialTerms;
 }
+
 export function spellCheck(term: string):string {
+	if (allWords.size === 0) {
+		return term
+	}
 	term = term.replace(/[\W\d]/ig, "");
 	if (allWords.has(term)) {
 		return term;

@@ -3,7 +3,6 @@ import { Navbar, FormControl, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import { spellCheck } from '../Utilities/Utilities';
 
-
 interface Props {
     fetchImages: (searchTerm: string) => Promise<void>
 }
@@ -15,7 +14,6 @@ const StyledInput = styled(FormControl) `
     margin-right: 10px;
 `
 const NavTop: React.FC<Props> = (props) => {
-    
     const { fetchImages } = props;
     const [searchTerm, setSearchTerm] = useState('')
     const handleClick = () => {
