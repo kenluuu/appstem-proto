@@ -8,7 +8,7 @@ interface Props {
 }
 
 const StyledBaseAlert = styled(BaseAlert) `
-    margin-top: 20px
+    margin-top: 120px
 `
 const P = styled.p `
     text-align: center;

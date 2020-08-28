@@ -1,6 +1,5 @@
 import { imageItem } from '../Interfaces/Interfaces';
 export function makeImageGroup(data: Array<imageItem> | undefined): Array<Array<imageItem>> {
-	
 	if (data === undefined || data.length === 0) {
 	  return []
 	}
@@ -31,56 +30,39 @@ export async function getWords() {
 	}
 }
 
-function getShortestEditDistance(term: string, words: Set<string>) {
-	let minEdits = Number.MAX_VALUE;
-	let correctedWord = '';
-	words.forEach(word => {
-		let edits = getShortestEditHelper(term, word);
-		if (edits < minEdits) {
-			minEdits = edits
-			correctedWord = word
-		}
-	});
-	return correctedWord;
-
+function isVowel(char: string):boolean {
+	if (char === 'a' || char ==='e' || char === 'i' || char === 'o' || char === 'u') {
+		return true
+	}
+	return false
 }
 
-function getShortestEditHelper(str1: string, str2: string): number {
-	let dp = [];
-	let n = str1.length + 1;
-	let m = str2.length + 1;
-	for(let i=0; i<n; i++) {
-		let arr = []
-		for (let j=0; j<m; j++) {
-			arr.push(0)
-		}
-		dp.push(arr)
-	}
-	for(let i=0; i<n; i++) {
-		for (let j=0; j<m; j++) {
-			if (i === 0 && j === 0) {
-				continue;
-			} else if (i === 0) {
-				dp[i][j] = dp[i][j-1] + 1
-			} else if (j === 0) {
-				dp[i][j] = dp[i-1][j] + 1
-			} else {
-				if (str1[i-1] === str2[j-1]) {
-					dp[i][j] = dp[i-1][j-1]
-				} else {
-					dp[i][j] = Math.min(dp[i-1][j-1], dp[i][j-1], dp[i-1][j]) + 1
-				}
+function subAllVowels(potentialTerms: Set<string>, term: Array<string>, start: number) {
+	let vewols = 'aeiou';
+	for(let i=start; i<term.length; i++) {
+		if (isVowel(term[i])) {
+			for (let j=0; j<vewols.length; j++) {
+				term[i] = vewols[j]
+				subAllVowels(potentialTerms, term, i+1)
+				potentialTerms.add(term.join(''))
 			}
 		}
 	}
-	return dp[n-1][m-1]
+	return potentialTerms;
 }
 export function spellCheck(term: string):string {
+	term = term.replace(/[\W\d]/ig, "");
 	if (allWords.has(term)) {
 		return term;
 	}
-	let suggestedWord = getShortestEditDistance(term, allWords);
-	return suggestedWord;
+	let res: string | null = null;
+	let potentialTerms:Set<string> = subAllVowels(new Set(), term.split(''), 0)
+	potentialTerms.forEach(potentialTerm => {
+		if (allWords.has(potentialTerm) && res === null) {
+			res = potentialTerm
+		}
+	})
+	return res || term;
 }
 
 
