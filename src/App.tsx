@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-
 import { Gallery, NavBar } from './Components';
 import { imageItem } from './Interfaces/Interfaces';
 import './App.css';
+import { getWords} from './Utilities/Utilities'
 
 
 function App() {
+
 	const [images, setImages] = useState<Array<imageItem>>();
 	const fetchImages = async (searchTerm: string = '') => {
 		const API_KEY = process.env.REACT_APP_API_KEY
@@ -23,6 +24,7 @@ function App() {
 		}
 	} 
 	useEffect(() => {
+		getWords()
 		fetchImages()
 	}, [])
 	return (

@@ -9,6 +9,10 @@ interface props {
     images?: Array<imageItem> 
 }
 
+const StyledContainer = styled(Container) `
+	margin-top: 100px
+`
+
 const StyledRow = styled(Row) `
 	margin-top: 20px
 `
@@ -38,7 +42,7 @@ const Gallery: React.FC<props> = (props) => {
 	}
 	const zeroMsg = "Sorry, we couldn't find any images for this search."
 	return (
-		<Container fluid="sm">
+		<StyledContainer fluid="sm">
 			{ images && images.length === 0 && <Alert bodyMsg={zeroMsg} alertProps={{variant:"dark"}}/> }
 			<Modal show={galleryState.modal} onHide={handleOnHide} size="lg" centered>
 				<ModalBody>
@@ -73,7 +77,7 @@ const Gallery: React.FC<props> = (props) => {
 					)
 				})
 			}
-		</Container>  
+		</StyledContainer>  
 	)
 }
 
